@@ -2719,7 +2719,7 @@ public class MNodeService extends D1NodeService
         String closingHtml = "</table></td>";
 
         // Wrap the table rows in a table
-        return openingHtml + tableHTMLBuilder.toString() + closingHtml;
+        return openingHtml + htmlString + closingHtml;
     }
 
     /*
@@ -2894,7 +2894,6 @@ public class MNodeService extends D1NodeService
                     org.w3c.dom.Node node = nodeList.item(i);
                     org.w3c.dom.NamedNodeMap parentAttributes = node.getParentNode().getAttributes();
                     String parentURI = parentAttributes.item(0).getTextContent();
-                    logMetacat.info(parentURI);
                     String filePath = node.getTextContent();
                     filePath = filePath.replaceAll("\"", "");
 
@@ -3009,7 +3008,6 @@ public class MNodeService extends D1NodeService
 
         // A temporary directory where the non-zipped bag is formed
         File tempBagRoot = null;
-
         // A temporary direcotry within the tempBagRoot that represents the metadata/ direcrory
         File metadataRoot = null;
         // A temporary directory within metadataRoot that holds system metadata
@@ -3207,7 +3205,7 @@ public class MNodeService extends D1NodeService
         bag.addFileAsTag(readmeFile);
 
         // The directory where the actual bag zipfile is saved (and streamed from)
-        File streamedBagFile = new File("/var/tmp/exportedPackages/"+Long.toString(System.nanoTime()));
+        File streamedBagFile = new File("/var/metacat/temporary/exportedPackages/"+Long.toString(System.nanoTime()));
 
         InputStream bagStream = createExportBagStream(bagFactory,
                 bag,
